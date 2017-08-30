@@ -75,7 +75,7 @@ int validarArgumentos(int argc, char **argv){
 	}
 
 	if (argc == TODOS_LOS_ARGUMENTOS){
-		if ((atoi(argv[ENTERO]) > MAXIMO) || (atoi(argv[ENTERO]) < MINIMO)){
+		if ((atoi(argv[ENTERO_POS_3]) > MAXIMO) || (atoi(argv[ENTERO_POS_3]) < MINIMO)){
 			return ERROR_FUERA_DE_RANGO;
 		}
 	}
@@ -84,7 +84,7 @@ int validarArgumentos(int argc, char **argv){
 }		
 
 
-void realizarAccion(char **argv){
+void realizarAccion(int argc, char **argv){
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
 		mostrarAyuda();
 	} 
@@ -93,13 +93,21 @@ void realizarAccion(char **argv){
 			mostrarVersion();
 		}
 		else {
-				int tope = atoi(argv[ENTERO]);
-				int arreglo[tope];
-				encontrarNumerosPrimos(tope,arreglo);
-				imprimirPorPantalla(tope,arreglo);
-				if (strcmp(argv[OPCION], "-o") == CORRECTO){
-					generarArchivo(tope,arreglo);
+				int cantArgumentos = (argc-1);
+				char qPos2=((cantArgumentos)==2)?*argv[ENTERO_POS_2]:0;
+				char qPos3=((cantArgumentos)==3)?*argv[ENTERO_POS_3]:0;
+                                int posEntero = (qPos2>=48&&qPos2<=57)?2:((qPos3>=48&&qPos3<=57)?3:0);
+				int tope = (posEntero!=0)?atoi(((posEntero==2)?argv[ENTERO_POS_2]:argv[ENTERO_POS_3])):0;
+                                if(posEntero!=0){
+					int arreglo[tope];
+					encontrarNumerosPrimos(tope,arreglo);
+					if ((strcmp(argv[OPCION], "-o") == CORRECTO)
+					    && (strcmp(argv[OPCION_1], "-") == CORRECTO)){
+							imprimirPorPantalla(tope,arreglo);
+					}else if(strcmp(argv[OPCION],"-o") == CORRECTO){
+							generarArchivo(tope,arreglo);
+					}
 				}
 		}
 	}
-}
+} 		

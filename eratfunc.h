@@ -11,8 +11,10 @@
 
 #define CORRECTO 0
 #define OPCION 1
-#define ENTERO 2
-#define TODOS_LOS_ARGUMENTOS 3
+#define OPCION_1 2
+#define ENTERO_POS_2 2
+#define ENTERO_POS_3 3
+#define TODOS_LOS_ARGUMENTOS 4
 
 //Pre: Se ingresa el tope hasta el cual se calcularán los números primos y un arreglo de enteros no inicializado.
 //Pos: El arreglo se encuentra cargado con todos los números correspondientes hasta el valor tope. 
@@ -48,4 +50,4 @@ int validarArgumentos(int argc, char **argv);
 //	-V muestra la versión.
 //	-o muestra por pantalla y crea un archivo.
 //	-  muestra por pantalla.
-void realizarAccion(char **argv);
+void realizarAccion(int argc, char **argv);
