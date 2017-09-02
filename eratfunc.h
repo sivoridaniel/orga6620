@@ -14,6 +14,8 @@
 #define OPCION_1 2
 #define ENTERO_POS_2 2
 #define ENTERO_POS_3 3
+#define DOS_ARGUMENTOS 2
+#define TRES_ARGUMENTOS 3
 #define TODOS_LOS_ARGUMENTOS 4
 
 //Pre: Se ingresa el tope hasta el cual se calcularán los números primos y un arreglo de enteros no inicializado.

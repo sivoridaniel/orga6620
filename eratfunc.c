@@ -49,7 +49,7 @@ void generarArchivo(int tope, int arreglo[]){
 }
 
 void mostrarVersion(){
-	printf("ERAT version 1.0 \n");	
+	printf("ERAT version 1.1 \n");	
 }
 
 void mostrarAyuda(){
@@ -63,27 +63,43 @@ void mostrarAyuda(){
 	printf("	-o,		--output	Path to output file.;\n");	
 }
 
+//Se verifica que los parámetros ingresados sigan el formato predeterminado
 int validarArgumentos(int argc, char **argv){
+	if ((argc > TODOS_LOS_ARGUMENTOS) || (argc < DOS_ARGUMENTOS)){
+		return ERROR_COMANDO_INVALIDO;
+	}
+	
 	if (strcmp(argv[OPCION], "-h") != CORRECTO){
 		if (strcmp(argv[OPCION], "-V") != CORRECTO){
 			if (strcmp(argv[OPCION], "-o") != CORRECTO){
-				if (strcmp(argv[OPCION], "-") != CORRECTO) {
-					return ERROR_COMANDO_INVALIDO;
-				}
+				return ERROR_COMANDO_INVALIDO;
 			}
 		}
 	}
-
+	else {
+		if (argc > DOS_ARGUMENTOS) {
+			return ERROR_COMANDO_INVALIDO;
+		}
+	}
+	
 	if (argc == TODOS_LOS_ARGUMENTOS){
+		if (strcmp(argv[ENTERO_POS_2], "-") != CORRECTO){
+			return ERROR_COMANDO_INVALIDO;
+		}
 		if ((atoi(argv[ENTERO_POS_3]) > MAXIMO) || (atoi(argv[ENTERO_POS_3]) < MINIMO)){
 			return ERROR_FUERA_DE_RANGO;
 		}
 	}
 	
+	if (argc == TRES_ARGUMENTOS){
+		if ((atoi(argv[ENTERO_POS_2]) > MAXIMO) || (atoi(argv[ENTERO_POS_2]) < MINIMO)){
+			return ERROR_FUERA_DE_RANGO;
+		}
+	}
 	return TODO_OK;		
 }		
 
-
+//Se realiza la acción previamente validada, ya sea mostrar la versión, la ayuda o hallar los números primos.
 void realizarAccion(int argc, char **argv){
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
 		mostrarAyuda();
@@ -93,21 +109,24 @@ void realizarAccion(int argc, char **argv){
 			mostrarVersion();
 		}
 		else {
-				int cantArgumentos = (argc-1);
-				char qPos2=((cantArgumentos)==2)?*argv[ENTERO_POS_2]:0;
-				char qPos3=((cantArgumentos)==3)?*argv[ENTERO_POS_3]:0;
-                                int posEntero = (qPos2>=48&&qPos2<=57)?2:((qPos3>=48&&qPos3<=57)?3:0);
-				int tope = (posEntero!=0)?atoi(((posEntero==2)?argv[ENTERO_POS_2]:argv[ENTERO_POS_3])):0;
-                                if(posEntero!=0){
-					int arreglo[tope];
-					encontrarNumerosPrimos(tope,arreglo);
-					if ((strcmp(argv[OPCION], "-o") == CORRECTO)
-					    && (strcmp(argv[OPCION_1], "-") == CORRECTO)){
-							imprimirPorPantalla(tope,arreglo);
-					}else if(strcmp(argv[OPCION],"-o") == CORRECTO){
-							generarArchivo(tope,arreglo);
-					}
+			int tope;
+			if (argc == TRES_ARGUMENTOS){
+				tope = atoi(argv[ENTERO_POS_2]);
+			}
+			else {
+				tope = atoi(argv[ENTERO_POS_3]);
+			}
+			int arreglo[tope];
+			encontrarNumerosPrimos(tope,arreglo);
+			if ((strcmp(argv[OPCION], "-o") == CORRECTO) && (strcmp(argv[OPCION_1], "-") == CORRECTO)){
+					imprimirPorPantalla(tope,arreglo);
+			}
+			else {
+				if(strcmp(argv[OPCION],"-o") == CORRECTO){
+					generarArchivo(tope,arreglo);
 				}
+			}
 		}
 	}
-} 		
+}
+	
