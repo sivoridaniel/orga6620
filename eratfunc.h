@@ -8,6 +8,7 @@
 #define TODO_OK 0
 #define ERROR_FUERA_DE_RANGO 1
 #define ERROR_COMANDO_INVALIDO 2
+#define ERROR_NOMBRE_ARCH_INVALIDO 4
 
 #define CORRECTO 0
 #define OPCION 1
@@ -31,7 +32,7 @@ void imprimirPorPantalla(int tope, int arreglo[]);
 
 //Pre: Se ingresa el arreglo y su cantidad máxima de elementos.
 //Pos: Se crea un archivo de texto en el cual se guardarán los números primos.
-void generarArchivo(int tope, int arreglo[]);
+int generarArchivo(int tope, int arreglo[], const char* name);
 
 //Imprime por pantalla las instrucciones de uso de erat
 void mostrarAyuda();
@@ -50,4 +51,4 @@ int validarArgumentos(int argc, char **argv);
 //	-V muestra la versión.
 //	-o muestra por pantalla y crea un archivo.
 //	-  muestra por pantalla.
-void realizarAccion(int argc, char **argv);
+int realizarAccion(int argc, char **argv);

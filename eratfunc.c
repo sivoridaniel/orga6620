@@ -7,7 +7,8 @@
 void inicializarNumerosPrimos(int tope, int arreglo[]){
 	
 	int valor = INICIO_VALOR;
-	for (int posicion = INICIO_ARRAY; posicion <= tope; posicion++){
+        int posicion;
+	for (posicion = INICIO_ARRAY; posicion <= tope; posicion++){
 		valor++;
 		arreglo[posicion] = valor;
 	}
@@ -17,9 +18,11 @@ void inicializarNumerosPrimos(int tope, int arreglo[]){
 void encontrarNumerosPrimos(int tope, int arreglo[]){
 	
 	inicializarNumerosPrimos(tope, arreglo);
-	for(int posicionPivote = INICIO_ARRAY; (posicionPivote * posicionPivote) <= tope; posicionPivote++) {
+	int posicionPivote;
+	for(posicionPivote = INICIO_ARRAY; (posicionPivote * posicionPivote) <= tope; posicionPivote++) {
        if(arreglo[posicionPivote] != CAMPO_VACIO) {
-           for( int posicionMovil = INICIO_ARRAY; (posicionPivote * posicionMovil) <= tope; posicionMovil++){
+	   int posicionMovil;
+           for( posicionMovil = INICIO_ARRAY; (posicionPivote * posicionMovil) <= tope; posicionMovil++){
 				arreglo[posicionPivote*posicionMovil] = CAMPO_VACIO;
 			}
 		}
@@ -27,7 +30,8 @@ void encontrarNumerosPrimos(int tope, int arreglo[]){
 }
 
 void imprimirPorPantalla(int tope, int arreglo[]){
-	for (int i = INICIO_ARRAY; i <= tope; i++){
+	int i;
+	for (i = INICIO_ARRAY; i <= tope; i++){
 		if (arreglo[i] != CAMPO_VACIO){
 			printf("%d  ", arreglo[i]);
 		}
@@ -35,17 +39,21 @@ void imprimirPorPantalla(int tope, int arreglo[]){
 	printf("\n");
 }
 
-void generarArchivo(int tope, int arreglo[]){
+int generarArchivo(int tope, int arreglo[],const char* name){
 	FILE *archivo;
-	archivo = fopen ("Numeros Primos.txt", "w");
-	
-	for (int i = INICIO_ARRAY; i <= tope; i++){
-		if (arreglo[i] != CAMPO_VACIO){
-			fprintf ( archivo, "%d\n", arreglo[i]);
+	archivo = fopen (name, "w");
+	if(archivo != 0){
+		int i;
+		for (i = INICIO_ARRAY; i <= tope; i++){
+			if (arreglo[i] != CAMPO_VACIO){
+				fprintf ( archivo, "%d\n", arreglo[i]);
+			}
 		}
+		fclose(archivo);
+	   return TODO_OK;
+	}else{
+	   return ERROR_NOMBRE_ARCH_INVALIDO;
 	}
-	
-	fclose(archivo);
 }
 
 void mostrarVersion(){
@@ -84,13 +92,16 @@ int validarArgumentos(int argc, char **argv){
 }		
 
 
-void realizarAccion(int argc, char **argv){
+int realizarAccion(int argc, char **argv){
+
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
 		mostrarAyuda();
+		return TODO_OK;
 	} 
 	else {
 		if (strcmp(argv[OPCION], "-V") == CORRECTO){
 			mostrarVersion();
+			return TODO_OK;
 		}
 		else {
 				int cantArgumentos = (argc-1);
@@ -103,11 +114,13 @@ void realizarAccion(int argc, char **argv){
 					encontrarNumerosPrimos(tope,arreglo);
 					if ((strcmp(argv[OPCION], "-o") == CORRECTO)
 					    && (strcmp(argv[OPCION_1], "-") == CORRECTO)){
-							imprimirPorPantalla(tope,arreglo);
+					        imprimirPorPantalla(tope,arreglo);
+                                                return TODO_OK;
 					}else if(strcmp(argv[OPCION],"-o") == CORRECTO){
-							generarArchivo(tope,arreglo);
+						return generarArchivo(tope,arreglo,argv[OPCION_1]);
 					}
 				}
 		}
 	}
+	return ERROR_COMANDO_INVALIDO;
 } 		
