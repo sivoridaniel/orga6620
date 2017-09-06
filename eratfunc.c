@@ -19,10 +19,10 @@ void encontrarNumerosPrimos(int tope, int arreglo[]){
 	
 	inicializarNumerosPrimos(tope, arreglo);
 	int posicionPivote;
-	for(posicionPivote = INICIO_ARRAY; (posicionPivote * posicionPivote) <= tope; posicionPivote++) {
-       if(arreglo[posicionPivote] != CAMPO_VACIO) {
+	for (posicionPivote = INICIO_ARRAY; (posicionPivote * posicionPivote) <= tope; posicionPivote++) {
+       if (arreglo[posicionPivote] != CAMPO_VACIO) {
 	   int posicionMovil;
-           for( posicionMovil = INICIO_ARRAY; (posicionPivote * posicionMovil) <= tope; posicionMovil++){
+           for (posicionMovil = INICIO_ARRAY; (posicionPivote * posicionMovil) <= tope; posicionMovil++) {
 				arreglo[posicionPivote*posicionMovil] = CAMPO_VACIO;
 			}
 		}
@@ -39,19 +39,19 @@ void imprimirPorPantalla(int tope, int arreglo[]){
 	printf("\n");
 }
 
-int generarArchivo(int tope, int arreglo[],const char* name){
+int generarArchivo(int tope, int arreglo[], const char* name){
 	FILE *archivo;
-	archivo = fopen (name, "w");
-	if(archivo != ALGUN_PROBLEMA){
+	archivo = fopen(name, "w");
+	if (archivo != ALGUN_PROBLEMA){
 		int i;
-		for (i = INICIO_ARRAY; i <= tope; i++){
-			if (arreglo[i] != CAMPO_VACIO){
-				fprintf ( archivo, "%d\n", arreglo[i]);
+		for (i = INICIO_ARRAY; i <= tope; i++) {
+			if (arreglo[i] != CAMPO_VACIO) {
+				fprintf(archivo, "%d\n", arreglo[i]);
 			}
 		}
 		fclose(archivo);
 	   return TODO_OK;
-	}else{
+	} else{
 	   return ERROR_NOMBRE_ARCH_INVALIDO;
 	}
 }
@@ -73,13 +73,13 @@ void mostrarAyuda(){
 
 //Se verifica que los parámetros ingresados sigan el formato predeterminado
 int validarArgumentos(int argc, char **argv){
-	if ((argc > TODOS_LOS_ARGUMENTOS) || (argc < DOS_ARGUMENTOS)){
+	if ((argc > TODOS_LOS_ARGUMENTOS) || (argc < DOS_ARGUMENTOS)) {
 		return ERROR_COMANDO_INVALIDO;
 	}
 	
 	if (strcmp(argv[OPCION], "-h") != CORRECTO){
 		if (strcmp(argv[OPCION], "-V") != CORRECTO){
-			if ((strcmp(argv[OPCION], "-o") != CORRECTO) || ((strcmp(argv[OPCION], "-o") == CORRECTO) && ((argc == DOS_ARGUMENTOS) || (argc == TRES_ARGUMENTOS)))){
+			if ((strcmp(argv[OPCION], "-o") != CORRECTO) || ((strcmp(argv[OPCION], "-o") == CORRECTO) && ((argc == DOS_ARGUMENTOS) || (argc == TRES_ARGUMENTOS)))) {
 				return ERROR_COMANDO_INVALIDO;
 			}
 		}
@@ -95,13 +95,13 @@ int validarArgumentos(int argc, char **argv){
 		}
 	}
 	
-	if (argc == TODOS_LOS_ARGUMENTOS){
+	if (argc == TODOS_LOS_ARGUMENTOS) {
 		if ((atoi(argv[ENTERO_POS_3]) > MAXIMO) || (atoi(argv[ENTERO_POS_3]) < MINIMO)){
 			return ERROR_FUERA_DE_RANGO;
 		}
 	}
 	
-	if (argc == TRES_ARGUMENTOS){
+	if (argc == TRES_ARGUMENTOS) {
 		if ((atoi(argv[ENTERO_POS_2]) > MAXIMO) || (atoi(argv[ENTERO_POS_2]) < MINIMO)){
 			return ERROR_FUERA_DE_RANGO;
 		}
@@ -111,7 +111,7 @@ int validarArgumentos(int argc, char **argv){
 
 
 //Se realiza la acción previamente validada, ya sea mostrar la versión, la ayuda o hallar los números primos.
-int realizarAccion(int argc, char **argv){
+int realizarAccion(int argc, char **argv) {
 	int mensajeDeError = TODO_OK;
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
 		mostrarAyuda();
