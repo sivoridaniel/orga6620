@@ -38,7 +38,7 @@
 \begin{abstract}
 En el presente trabajo práctico se describirán todos los pasos y 
 conclusiones relacionadas al desarrollo e implementación de una versión en lenguaje C,
-de la Criba de Eratóstenes.
+de la Criba de Eratóstenes. Y su posterior compilacion y ejecucion bajo el procesador MIPS.
 \end{abstract}
 \newpage{}
 \tableofcontents
@@ -57,11 +57,11 @@ operativo NetBSD/pmax.
 
 \subsection{{\normalsize Lenguaje}}
 
-Como lenguaje de implementación se eligió ANSI C
-ya que el mismo permite una alta portabilidad entre diferentes plataformas. 
-El desarrollo del programa se realizó usando un editor de texto 
-(gedit,vim, kwrite) y compilando los archivos fuente con 
-\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux.
+Como lenguaje de implementación se eligio C ya que el mismo permite una alta portabilidad entre 
+diferentes plataformas. El desarrollo del programa se realizó usando editores de texto 
+(gedit,vim, kwrite y sublime) y compilando los archivos fuente con 
+\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux. Ya que esta compilador es compatible
+con el sistema operativo NetBSD y con la arquitecura MIPS.
 Para compilar, ejecutar el siguiente comando:
 
 \begin{tabbing}
@@ -71,8 +71,8 @@ Para compilar, ejecutar el siguiente comando:
 
 \subsection {{\normalsize Descripción del programa}}
 
-Por empezar tenemos un archivo llamado \texttt{erat.c} que con tiene la funcion
-\texttt{main}, aqui lo primero que hacemos la validacion de los argumentos, mediante 
+Por empezar tenemos un archivo llamado \texttt{erat.c} que contiene la funcion
+\texttt{main}, aqui lo primero que hacemos es la validacion de los argumentos, mediante 
 una funcion llamada \texttt{validarArgumentos}. Caso de ingresarse algo invalido 
 el programa no continuara, y retornara un valor distinto de 0, osea un codigo de error. Caso contrario, 
 se llama a la funcion \texttt{realizarAccion} y aqui comienza el procesamiento de calcular 
