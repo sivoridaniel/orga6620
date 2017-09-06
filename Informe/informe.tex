@@ -54,8 +54,6 @@ El objetivo del presente trabajo práctico es familiarizarse con el emulador gxem
 
 \section{{\normalsize Implementación}}
 
-
-
 \subsection{{\normalsize Lenguaje}}
 
 Como lenguaje de implementación se eligió ANSI C
@@ -87,15 +85,9 @@ de cero, que son los primos.
 \subsubsection {{\normalsize Errores posibles}}
 
 \begin{enumerate}
-\item El procesamiento de la entrada estándar causó el agotamiento del heap.
-\item La invocación del programa es incorrecta.
-\item El archivo de salida no se escribió correctamente.
+\item Fuera de rango: Cuando se ingresa un numero menor o igual que 1. El programa retorna 1. 
+\item Comando invalido: Cuando se invoca al programa con flags inexistentes o escritos de forma desordenada. El programa retorna 2.
 \end{enumerate}
-
-Se contemplan otros errores gracias al uso de la variable externa errno. 
-Cuando ocurre un error inesperado, el mismo es informado por stderr y finaliza el programa
-liberando la memoria que se habia solicitado hasta el momento.
-(con la funión perror()).
 
 \subsection{{\normalsize Corridas de prueba }}
 
