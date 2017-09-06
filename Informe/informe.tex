@@ -94,10 +94,7 @@ de cero, que son los primos.
 \item Fuera de rango: Cuando se ingresa un numero menor o igual que 1. El programa retorna 1. 
 \end{enumerate}
 
-Se contemplan otros errores gracias al uso de la variable externa errno. 
-Cuando ocurre un error inesperado, el mismo es informado por stderr y finaliza el programa
-liberando la memoria que se habia solicitado hasta el momento.
-(con la funi�n perror()).
+\subsubsection {{\normalsize Corridas de prueba}}
 
 \begin{enumerate}
 \item Caso N = -5
@@ -107,33 +104,27 @@ El programa no imprime nada y retorna el codigo de error 1.
 \item Caso N = 10
 El programa imprime: 2 3 5 7 y retorna el codigo de exito 0.
 \item Caso N = 50
-\item Caso N = 100
 El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el codigo de exito 0.
+\item Caso N = 100
 El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 y retorna el codigo de exito 0.  
 \end{enumerate}
-
-\newpage{}
-\subsection{{\normalsize Corridas de pruebas}}
-	Para correr las pruebas se debe ejecutar el comando make del directorio pruebas y se veran resultados como los de 
-	a continuacion:
-	\newline
-	\begin{center}
-		\includegraphics[width=110mm,height=80mm]{PONER GRAFICO}
-	\end{center}	
 	
 \newpage
-\section{{\normalsize El código fuente, en lenguaje C}}
+\section{{\normalsize El código fuente, en lenguaje C:}}
 
-	\lstinputlisting[language=C, basicstyle=\tiny]{../main.c}	
+	\lstinputlisting[language=C, basicstyle=\tiny]{../erat.c}
+	\lstinputlisting[language=C, basicstyle=\tiny]{../erat.h}
+	\lstinputlisting[language=C, basicstyle=\tiny]{../eratfunc.c}
+	\lstinputlisting[language=C, basicstyle=\tiny]{../eratfunc.h}	
 
 \newpage
 \newpage
 \newpage
 
-\section{{\normalsize El código MIPS32 generado por el compilado}}
+\section{{\normalsize El código assembly generador por GCC en el simulador es:}}
 
-	\lstinputlisting[language={[x86masm]Assembler}, firstline=1, lastline=45, basicstyle=\small]{../main.s}
- 
+	\lstinputlisting[language={[x86masm]Assembler}, firstline=1, lastline=45, basicstyle=\small]{../erat.s}
+ 	\lstinputlisting[language={[x86masm]Assembler}, firstline=1, lastline=45, basicstyle=\small]{../eratfunc.s}
  
 \newpage{}
 \section{{\normalsize Conclusiones}}
