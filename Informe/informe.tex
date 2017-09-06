@@ -1,9 +1,9 @@
 \documentclass[a4paper,10pt]{article}
-% Paquete para inclusión de gráficos.
+% Paquete para inclusiÃ³n de grÃ¡ficos.
 \usepackage{graphicx}
 % Paquete para definir el idioma usado.
 \usepackage[spanish]{babel}
-% Paquete para definir la codificación del conjunto de caracteres usado
+% Paquete para definir la codificaciÃ³n del conjunto de caracteres usado
 % (latin1 es ISO 8859-1).
 \usepackage[latin1]{inputenc}
 \usepackage{hyperref}
@@ -12,33 +12,33 @@
 \usepackage{pdfpages}
 
 
-% Título principal del documento.
-\title{	\ Trabajo Práctico Nº 0: Infraestructura Básica}
-% Información sobre los autores.
-\author{	Sebastian Ripari, \textit{Padrón Nro. 96453}\\
-            \texttt{ sebastiandanielripari@hotmail.com }\\\\
-            Cesar, \textit{Padrón Nro. PONER_PADRON}\\
-            \texttt{ PONER_MAIL }\\\\
-			Pablo Sivori, \textit{Padrón Nro. 84026] }\\
-            \texttt{ sivori.daniel@gmail.com }\\\\               
-            \texttt{\footnotesize 1º Entrega: 07/09/2017}\\
+% TÃ­tulo principal del documento.
+\title{	\ Trabajo PrÃ¡ctico NÂº 0: Infraestructura BÃ¡sica}
+% InformaciÃ³n sobre los autores.
+\author{	Sebastian Ripari, \textit{PadrÃ³n Nro. 96453}\\
+            \texttt{sebastiandanielripari@hotmail.com }\\\\
+            Cesar Emanuel Lencina, \textit{PadrÃ³n Nro. 96078}\\
+            \texttt{cel_1990@live.com}\\\\
+			Pablo Sivori, \textit{PadrÃ³n Nro. 84026}\\
+            \texttt{sivori.daniel@gmail.com}\\\\               
+            \texttt{\footnotesize 1Âº Entrega: 07/09/2017}\\
             \\\\\\\\\\\\\\\\\\
             \normalsize{2do. Cuatrimestre de 2017}\\ 
-            \normalsize{66.20 Organización de Computadoras} \\
-            \normalsize{Facultad de Ingeniería, Universidad de Buenos Aires} \\}
+            \normalsize{66.20 OrganizaciÃ³n de Computadoras} \\
+            \normalsize{Facultad de IngenierÃ­a, Universidad de Buenos Aires} \\}
        
 \date{}
 
 \begin{document}
-% Inserta el título.
+% Inserta el tÃ­tulo.
 \maketitle
-% quita el número en la primer página
+% quita el nÃºmero en la primer pÃ¡gina
 \thispagestyle{empty}
 % Resumen
 \begin{abstract}
-En el presente trabajo práctico se describirán todos los pasos y 
-conclusiones relacionadas al desarrollo e implementación de una versión en lenguaje C,
-de la Criba de Eratóstenes.
+En el presente trabajo prÃ¡ctico se describirÃ¡n todos los pasos y 
+conclusiones relacionadas al desarrollo e implementaciÃ³n de una versiÃ³n en lenguaje C,
+de la Criba de EratÃ³stenes. Y su posterior compilacion y ejecucion bajo el procesador MIPS.
 \end{abstract}
 \newpage{}
 \tableofcontents
@@ -47,20 +47,25 @@ de la Criba de Eratóstenes.
 \begin{flushleft}
 
 \par\end{flushleft}
-\section{{\normalsize Introducción}}
+\section{{\normalsize IntroducciÃ³n}}
 
-El objetivo del presente trabajo práctico es familiarizarse con el emulador gxemul mediante la implementacion de un programa que nos devuelva por stdout o en un archivo de salida, los números primos menores a un número natural N el cuál es ingresado por parámetro.
+El objetivo del presente trabajo prÃ¡ctico es familiarizarse con el emulador gxemul mediante la implementacion de un programa que nos devuelva por stdout o en un archivo de salida, los nÃºmeros primos menores a un nÃºmero natural N el cuÃ¡l es ingresado por parÃ¡metro.
+
+\section{{\normalsize Entorno de trabajo}}
+Mediante el emulador Gxemule pudimos simular una DEC Station 5000/200 con un microprocesador MIPS de 32 Bits, corriendo un sistema 
+operativo NetBSD/pmax.
+
+\section{{\normalsize Implementaciï¿½n}}
 
 
-\section{{\normalsize Implementación}}
 
 \subsection{{\normalsize Lenguaje}}
 
-Como lenguaje de implementación se eligió ANSI C
-ya que el mismo permite una alta portabilidad entre diferentes plataformas. 
-El desarrollo del programa se realizó usando un editor de texto 
-(gedit,vim, kwrite) y compilando los archivos fuente con 
-\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux.
+Como lenguaje de implementaciÃ³n se eligio C ya que el mismo permite una alta portabilidad entre 
+diferentes plataformas. El desarrollo del programa se realizÃ³ usando editores de texto 
+(gedit,vim, kwrite y sublime) y compilando los archivos fuente con 
+\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux. Ya que esta compilador es compatible
+con el sistema operativo NetBSD y con la arquitecura MIPS.
 Para compilar, ejecutar el siguiente comando:
 
 \begin{tabbing}
@@ -68,10 +73,10 @@ Para compilar, ejecutar el siguiente comando:
 \> \textbf{\emph{\$ make}}\\ 
 \end{tabbing}
 
-\subsection {{\normalsize Descripción del programa}}
+\subsection {{\normalsize DescripciÃ³n del programa}}
 
-Por empezar tenemos un archivo llamado \texttt{erat.c} que con tiene la funcion
-\texttt{main}, aqui lo primero que hacemos la validacion de los argumentos, mediante 
+Por empezar tenemos un archivo llamado \texttt{erat.c} que contiene la funcion
+\texttt{main}, aqui lo primero que hacemos es la validacion de los argumentos, mediante 
 una funcion llamada \texttt{validarArgumentos}. Caso de ingresarse algo invalido 
 el programa no continuara, y retornara un valor distinto de 0, osea un codigo de error. Caso contrario, 
 se llama a la funcion \texttt{realizarAccion} y aqui comienza el procesamiento de calcular 
@@ -85,11 +90,14 @@ de cero, que son los primos.
 \subsubsection {{\normalsize Errores posibles}}
 
 \begin{enumerate}
-\item Fuera de rango: Cuando se ingresa un numero menor o igual que 1. El programa retorna 1. 
 \item Comando invalido: Cuando se invoca al programa con flags inexistentes o escritos de forma desordenada. El programa retorna 2.
+\item Fuera de rango: Cuando se ingresa un numero menor o igual que 1. El programa retorna 1. 
 \end{enumerate}
 
-\subsection{{\normalsize Corridas de prueba }}
+Se contemplan otros errores gracias al uso de la variable externa errno. 
+Cuando ocurre un error inesperado, el mismo es informado por stderr y finaliza el programa
+liberando la memoria que se habia solicitado hasta el momento.
+(con la funiï¿½n perror()).
 
 \begin{enumerate}
 \item Caso N = -5
@@ -99,8 +107,8 @@ El programa no imprime nada y retorna el codigo de error 1.
 \item Caso N = 10
 El programa imprime: 2 3 5 7 y retorna el codigo de exito 0.
 \item Caso N = 50
-El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el codigo de exito 0.
 \item Caso N = 100
+El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el codigo de exito 0.
 El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 y retorna el codigo de exito 0.  
 \end{enumerate}
 
@@ -114,7 +122,7 @@ El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 7
 	\end{center}	
 	
 \newpage
-\section{{\normalsize El código fuente, en lenguaje C}}
+\section{{\normalsize El cÃ³digo fuente, en lenguaje C}}
 
 	\lstinputlisting[language=C, basicstyle=\tiny]{../main.c}	
 
@@ -122,7 +130,7 @@ El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 7
 \newpage
 \newpage
 
-\section{{\normalsize El código MIPS32 generado por el compilado}}
+\section{{\normalsize El cÃ³digo MIPS32 generado por el compilado}}
 
 	\lstinputlisting[language={[x86masm]Assembler}, firstline=1, lastline=45, basicstyle=\small]{../main.s}
  
@@ -131,8 +139,8 @@ El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 7
 \section{{\normalsize Conclusiones}}
 
 \begin{enumerate}
-\item Si bien lo solicitado por el programa no era excesivamente difícil,
-la realización completa del TP llevó cierta dificultad al tener que
+\item Si bien lo solicitado por el programa no era excesivamente difÃ­cil,
+la realizaciÃ³n completa del TP llevÃ³ cierta dificultad al tener que
 realizarlo en el contexto solicitado: alta portabilidad, desarrollo
 en C, e informe hecho en LaTeX. 
 \item En el primer caso la dificultad radicaba en tener configurado 
@@ -140,12 +148,12 @@ y funcionando el GXEmul dentro de un Linux, y lograr que en ambos casos
 el programa compile y corra sin problemas. 
 \item Debido a nuestro desconocimiento con LaTeX, tuvimos que 
 invertir tiempo en encontrar forma de realizar el presente documento 
-de la manera más correcta posible 
+de la manera mÃ¡s correcta posible 
 \item En cuanto al trabajo grupal en si mismo, no hubo inconvenientes de
-ningún tipo ya que al ser el grupo relativamente chico y tener conocimiento
+ningÃºn tipo ya que al ser el grupo relativamente chico y tener conocimiento
 del manejo del versionado de un proyecto ante cambios ingresado por
-los integrantes (por medio del GIT), la introducción de modificaciones
-y correcciones fué fluida. 
+los integrantes (por medio del GIT), la introducciÃ³n de modificaciones
+y correcciones fuÃ© fluida. 
 \end{enumerate}
 
 \newpage
