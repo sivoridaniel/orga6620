@@ -19,6 +19,8 @@
 #define TRES_ARGUMENTOS 3
 #define TODOS_LOS_ARGUMENTOS 4
 
+#define ALGUN_PROBLEMA 0
+
 //Pre: Se ingresa el tope hasta el cual se calcularán los números primos y un arreglo de enteros no inicializado.
 //Pos: El arreglo se encuentra cargado con todos los números correspondientes hasta el valor tope. 
 void inicializarNumerosPrimos(int tope, int arreglo[]);

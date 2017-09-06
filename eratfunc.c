@@ -42,7 +42,7 @@ void imprimirPorPantalla(int tope, int arreglo[]){
 int generarArchivo(int tope, int arreglo[],const char* name){
 	FILE *archivo;
 	archivo = fopen (name, "w");
-	if(archivo != 0){
+	if(archivo != ALGUN_PROBLEMA){
 		int i;
 		for (i = INICIO_ARRAY; i <= tope; i++){
 			if (arreglo[i] != CAMPO_VACIO){
@@ -79,10 +79,15 @@ int validarArgumentos(int argc, char **argv){
 	
 	if (strcmp(argv[OPCION], "-h") != CORRECTO){
 		if (strcmp(argv[OPCION], "-V") != CORRECTO){
-			if (strcmp(argv[OPCION], "-o") != CORRECTO){
+			if ((strcmp(argv[OPCION], "-o") != CORRECTO) || ((strcmp(argv[OPCION], "-o") == CORRECTO) && ((argc == DOS_ARGUMENTOS) || (argc == TRES_ARGUMENTOS)))){
 				return ERROR_COMANDO_INVALIDO;
 			}
 		}
+		else {
+		if (argc > DOS_ARGUMENTOS) {
+			return ERROR_COMANDO_INVALIDO;
+		}
+	}
 	}
 	else {
 		if (argc > DOS_ARGUMENTOS) {
@@ -91,9 +96,6 @@ int validarArgumentos(int argc, char **argv){
 	}
 	
 	if (argc == TODOS_LOS_ARGUMENTOS){
-		if (strcmp(argv[ENTERO_POS_2], "-") != CORRECTO){
-			return ERROR_COMANDO_INVALIDO;
-		}
 		if ((atoi(argv[ENTERO_POS_3]) > MAXIMO) || (atoi(argv[ENTERO_POS_3]) < MINIMO)){
 			return ERROR_FUERA_DE_RANGO;
 		}
@@ -110,14 +112,13 @@ int validarArgumentos(int argc, char **argv){
 
 //Se realiza la acción previamente validada, ya sea mostrar la versión, la ayuda o hallar los números primos.
 int realizarAccion(int argc, char **argv){
+	int mensajeDeError = TODO_OK;
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
 		mostrarAyuda();
-		return TODO_OK;
 	} 
 	else {
 		if (strcmp(argv[OPCION], "-V") == CORRECTO){
 			mostrarVersion();
-			return TODO_OK;
 		}
 		else {
 			int tope;
@@ -134,10 +135,10 @@ int realizarAccion(int argc, char **argv){
 			}
 			else {
 				if(strcmp(argv[OPCION],"-o") == CORRECTO){
-					generarArchivo(tope,arreglo,argv[OPCION_1]);
+					mensajeDeError = generarArchivo(tope,arreglo,argv[OPCION_1]);
 				}
 			}
 		}
 	}
-	return ERROR_COMANDO_INVALIDO;
+	return mensajeDeError;
 } 		
