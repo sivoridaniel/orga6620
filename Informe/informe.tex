@@ -54,6 +54,8 @@ El objetivo del presente trabajo práctico es familiarizarse con el emulador gxem
 
 \section{{\normalsize Implementación}}
 
+
+
 \subsection{{\normalsize Lenguaje}}
 
 Como lenguaje de implementación se eligió ANSI C
@@ -70,19 +72,17 @@ Para compilar, ejecutar el siguiente comando:
 
 \subsection {{\normalsize Descripción del programa}}
 
-Completar con el diseño del programa ... 
-
-La función \texttt{main} se encuentra en \texttt{tp0.c} 
-y se encarga de interpretar las opciones y argumentos. En caso de ser una opción, 
-como ayuda o versión, se imprime el mensaje correspondiente y finaliza
-la ejecución. Cuando no es una opción de ayuda o versión, se procede 
-a procesar los datos de entrada. La salida de estas funciones proveen 
-un codigo de error que sirve como salida del programa. Los mensajes de 
-versión y ayuda se imprimen por stdout y el programa 
-finaliza devolviendo 0 (cero) al sistema. Los mensajes de error se 
-imprimen por la salida de errores (stderr) y el programa finaliza 
-devolviendo 1 (uno) al sistema.
-
+Por empezar tenemos un archivo llamado \texttt{erat.c} que con tiene la funcion
+\texttt{main}, aqui lo primero que hacemos la validacion de los argumentos, mediante 
+una funcion llamada \texttt{validarArgumentos}. Caso de ingresarse algo invalido 
+el programa no continuara, y retornara un valor distinto de 0, osea un codigo de error. Caso contrario, 
+se llama a la funcion \texttt{realizarAccion} y aqui comienza el procesamiento de calcular 
+la cantidad de numeros primos, entre 2 y el numero \texttt{tope} ingresado. Basicamente lo que hacemos es 
+crear un array que contiene todos los numeros entre 2 y el numero ingresado, el \texttt{tope}. 
+y luego le aplicamos a este array el algoritmo de la Criba de Erastostenes, mediante la funcion \texttt{encontrarNumerosPrimos},
+que en las posiciones del array donde no hay un numero primo setea un cero.
+Para luego tomar este array desde una funcion que se llama \texttt{imprimirPorPantalla}, y aqui imprimir todos los numeros distintos
+de cero, que son los primos.
 
 \subsubsection {{\normalsize Errores posibles}}
 
