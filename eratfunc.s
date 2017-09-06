@@ -277,7 +277,7 @@ $L38:
 	.rdata
 	.align	2
 $LC4:
-	.ascii	"ERAT version 1.0 \n\000"
+	.ascii	"ERAT version 1.1 \n\000"
 	.text
 	.align	2
 	.globl	mostrarVersion
@@ -388,9 +388,6 @@ $LC14:
 	.align	2
 $LC15:
 	.ascii	"-o\000"
-	.align	2
-$LC16:
-	.ascii	"-\000"
 	.text
 	.align	2
 	.globl	validarArgumentos
@@ -410,61 +407,118 @@ validarArgumentos:
 	move	$fp,$sp
 	sw	$4,48($fp)
 	sw	$5,52($fp)
+	lw	$2,48($fp)
+	slt	$2,$2,5
+	beq	$2,$0,$L50
+	lw	$2,48($fp)
+	slt	$2,$2,2
+	bne	$2,$0,$L50
+	b	$L49
+$L50:
+	li	$2,2			# 0x2
+	sw	$2,24($fp)
+	b	$L48
+$L49:
 	lw	$2,52($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC13
 	la	$25,strcmp
 	jal	$31,$25
-	beq	$2,$0,$L49
+	beq	$2,$0,$L51
 	lw	$2,52($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC14
 	la	$25,strcmp
 	jal	$31,$25
-	beq	$2,$0,$L49
+	beq	$2,$0,$L52
 	lw	$2,52($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC15
 	la	$25,strcmp
 	jal	$31,$25
-	beq	$2,$0,$L49
+	bne	$2,$0,$L54
 	lw	$2,52($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
-	la	$5,$LC16
+	la	$5,$LC15
 	la	$25,strcmp
 	jal	$31,$25
-	beq	$2,$0,$L49
+	bne	$2,$0,$L57
+	lw	$3,48($fp)
+	li	$2,2			# 0x2
+	beq	$3,$2,$L54
+	lw	$3,48($fp)
+	li	$2,3			# 0x3
+	beq	$3,$2,$L54
+	b	$L57
+$L54:
 	li	$2,2			# 0x2
 	sw	$2,24($fp)
 	b	$L48
-$L49:
+$L52:
+	lw	$2,48($fp)
+	slt	$2,$2,3
+	bne	$2,$0,$L57
+	li	$2,2			# 0x2
+	sw	$2,24($fp)
+	b	$L48
+$L51:
+	lw	$2,48($fp)
+	slt	$2,$2,3
+	bne	$2,$0,$L57
+	li	$2,2			# 0x2
+	sw	$2,24($fp)
+	b	$L48
+$L57:
 	lw	$3,48($fp)
 	li	$2,4			# 0x4
-	bne	$3,$2,$L53
+	bne	$3,$2,$L59
 	lw	$2,52($fp)
 	addu	$2,$2,12
 	lw	$4,0($2)
 	la	$25,atoi
 	jal	$31,$25
 	slt	$2,$2,4097
-	beq	$2,$0,$L55
+	beq	$2,$0,$L61
 	lw	$2,52($fp)
 	addu	$2,$2,12
 	lw	$4,0($2)
 	la	$25,atoi
 	jal	$31,$25
 	slt	$2,$2,2
-	bne	$2,$0,$L55
-	b	$L53
-$L55:
+	bne	$2,$0,$L61
+	b	$L59
+$L61:
 	li	$2,1			# 0x1
 	sw	$2,24($fp)
 	b	$L48
-$L53:
+$L59:
+	lw	$3,48($fp)
+	li	$2,3			# 0x3
+	bne	$3,$2,$L62
+	lw	$2,52($fp)
+	addu	$2,$2,8
+	lw	$4,0($2)
+	la	$25,atoi
+	jal	$31,$25
+	slt	$2,$2,4097
+	beq	$2,$0,$L64
+	lw	$2,52($fp)
+	addu	$2,$2,8
+	lw	$4,0($2)
+	la	$25,atoi
+	jal	$31,$25
+	slt	$2,$2,2
+	bne	$2,$0,$L64
+	b	$L62
+$L64:
+	li	$2,1			# 0x1
+	sw	$2,24($fp)
+	b	$L48
+$L62:
 	sw	$0,24($fp)
 $L48:
 	lw	$2,24($fp)
@@ -475,135 +529,72 @@ $L48:
 	j	$31
 	.end	validarArgumentos
 	.size	validarArgumentos, .-validarArgumentos
+	.rdata
+	.align	2
+$LC16:
+	.ascii	"-\000"
+	.text
 	.align	2
 	.globl	realizarAccion
 	.ent	realizarAccion
 realizarAccion:
-	.frame	$fp,88,$31		# vars= 48, regs= 3/0, args= 16, extra= 8
+	.frame	$fp,56,$31		# vars= 16, regs= 3/0, args= 16, extra= 8
 	.mask	0xd0000000,-8
 	.fmask	0x00000000,0
 	.set	noreorder
 	.cpload	$25
 	.set	reorder
-	subu	$sp,$sp,88
+	subu	$sp,$sp,56
 	.cprestore 16
-	sw	$31,80($sp)
-	sw	$fp,76($sp)
-	sw	$28,72($sp)
+	sw	$31,48($sp)
+	sw	$fp,44($sp)
+	sw	$28,40($sp)
 	move	$fp,$sp
-	sw	$4,88($fp)
-	sw	$5,92($fp)
-	lw	$2,92($fp)
+	sw	$4,56($fp)
+	sw	$5,60($fp)
+	sw	$0,24($fp)
+	lw	$2,60($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC13
 	la	$25,strcmp
 	jal	$31,$25
-	bne	$2,$0,$L57
+	bne	$2,$0,$L66
 	la	$25,mostrarAyuda
 	jal	$31,$25
-	sw	$0,40($fp)
-	b	$L56
-$L57:
-	lw	$2,92($fp)
+	b	$L67
+$L66:
+	lw	$2,60($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC14
 	la	$25,strcmp
 	jal	$31,$25
-	bne	$2,$0,$L59
+	bne	$2,$0,$L68
 	la	$25,mostrarVersion
 	jal	$31,$25
-	sw	$0,40($fp)
-	b	$L56
-$L59:
-	lw	$2,88($fp)
-	addu	$2,$2,-1
-	sw	$2,24($fp)
-	lw	$3,24($fp)
-	li	$2,2			# 0x2
-	bne	$3,$2,$L61
-	lw	$2,92($fp)
-	addu	$2,$2,8
-	lw	$2,0($2)
-	lbu	$2,0($2)
-	sb	$2,44($fp)
-	b	$L62
-$L61:
-	sb	$0,44($fp)
-$L62:
-	lbu	$2,44($fp)
-	sb	$2,28($fp)
-	lw	$3,24($fp)
-	li	$2,3			# 0x3
-	bne	$3,$2,$L63
-	lw	$2,92($fp)
-	addu	$2,$2,12
-	lw	$2,0($2)
-	lbu	$2,0($2)
-	sb	$2,45($fp)
-	b	$L64
-$L63:
-	sb	$0,45($fp)
-$L64:
-	lbu	$2,45($fp)
-	sb	$2,29($fp)
-	lb	$2,28($fp)
-	slt	$2,$2,48
-	bne	$2,$0,$L67
-	lb	$2,28($fp)
-	slt	$2,$2,58
-	beq	$2,$0,$L67
-	b	$L65
-$L67:
-	lb	$2,29($fp)
-	slt	$2,$2,48
-	bne	$2,$0,$L68
-	lb	$2,29($fp)
-	slt	$2,$2,58
-	beq	$2,$0,$L68
-	li	$2,3			# 0x3
-	sw	$2,48($fp)
-	b	$L66
+	b	$L67
 $L68:
-	sw	$0,48($fp)
-	b	$L66
-$L65:
-	li	$2,2			# 0x2
-	sw	$2,48($fp)
-$L66:
-	lw	$2,48($fp)
-	sw	$2,32($fp)
-	lw	$2,32($fp)
-	beq	$2,$0,$L70
-	lw	$3,32($fp)
-	li	$2,2			# 0x2
-	bne	$3,$2,$L72
-	lw	$2,92($fp)
+	sw	$sp,32($fp)
+	lw	$3,56($fp)
+	li	$2,3			# 0x3
+	bne	$3,$2,$L70
+	lw	$2,60($fp)
 	addu	$2,$2,8
-	lw	$2,0($2)
-	sw	$2,56($fp)
-	b	$L73
-$L72:
-	lw	$2,92($fp)
-	addu	$2,$2,12
-	lw	$2,0($2)
-	sw	$2,56($fp)
-$L73:
-	lw	$4,56($fp)
+	lw	$4,0($2)
 	la	$25,atoi
 	jal	$31,$25
-	sw	$2,52($fp)
+	sw	$2,28($fp)
 	b	$L71
 $L70:
-	sw	$0,52($fp)
+	lw	$2,60($fp)
+	addu	$2,$2,12
+	lw	$4,0($2)
+	la	$25,atoi
+	jal	$31,$25
+	sw	$2,28($fp)
 $L71:
-	lw	$2,52($fp)
-	sw	$2,36($fp)
-	lw	$2,32($fp)
-	beq	$2,$0,$L58
-	sw	$sp,60($fp)
-	lw	$2,36($fp)
+	lw	$2,28($fp)
 	addu	$2,$2,-1
 	sll	$2,$2,2
 	addu	$2,$2,4
@@ -612,61 +603,54 @@ $L71:
 	sll	$2,$2,3
 	subu	$sp,$sp,$2
 	addu	$2,$sp,16
-	sw	$2,64($fp)
-	lw	$4,36($fp)
-	lw	$5,64($fp)
+	sw	$2,36($fp)
+	lw	$4,28($fp)
+	lw	$5,36($fp)
 	la	$25,encontrarNumerosPrimos
 	jal	$31,$25
-	lw	$2,92($fp)
+	lw	$2,60($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC15
 	la	$25,strcmp
 	jal	$31,$25
-	bne	$2,$0,$L75
-	lw	$2,92($fp)
+	bne	$2,$0,$L72
+	lw	$2,60($fp)
 	addu	$2,$2,8
 	lw	$4,0($2)
 	la	$5,$LC16
 	la	$25,strcmp
 	jal	$31,$25
-	bne	$2,$0,$L75
-	lw	$4,36($fp)
-	lw	$5,64($fp)
+	bne	$2,$0,$L72
+	lw	$4,28($fp)
+	lw	$5,36($fp)
 	la	$25,imprimirPorPantalla
 	jal	$31,$25
-	lw	$sp,60($fp)
-	sw	$0,40($fp)
-	b	$L56
-$L75:
-	lw	$2,92($fp)
+	b	$L73
+$L72:
+	lw	$2,60($fp)
 	addu	$2,$2,4
 	lw	$4,0($2)
 	la	$5,$LC15
 	la	$25,strcmp
 	jal	$31,$25
-	bne	$2,$0,$L76
-	lw	$2,92($fp)
+	bne	$2,$0,$L73
+	lw	$2,60($fp)
 	addu	$2,$2,8
-	lw	$4,36($fp)
-	lw	$5,64($fp)
+	lw	$4,28($fp)
+	lw	$5,36($fp)
 	lw	$6,0($2)
 	la	$25,generarArchivo
 	jal	$31,$25
-	lw	$sp,60($fp)
-	sw	$2,40($fp)
-	b	$L56
-$L76:
-	lw	$sp,60($fp)
-$L58:
-	li	$2,2			# 0x2
-	sw	$2,40($fp)
-$L56:
-	lw	$2,40($fp)
+	sw	$2,24($fp)
+$L73:
+	lw	$sp,32($fp)
+$L67:
+	lw	$2,24($fp)
 	move	$sp,$fp
-	lw	$31,80($sp)
-	lw	$fp,76($sp)
-	addu	$sp,$sp,88
+	lw	$31,48($sp)
+	lw	$fp,44($sp)
+	addu	$sp,$sp,56
 	j	$31
 	.end	realizarAccion
 	.size	realizarAccion, .-realizarAccion

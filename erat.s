@@ -32,6 +32,7 @@ main:
 	lw	$5,52($fp)
 	la	$25,realizarAccion
 	jal	$31,$25
+	sw	$2,24($fp)
 $L6:
 	lw	$2,24($fp)
 	move	$sp,$fp
