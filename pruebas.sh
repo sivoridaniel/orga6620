@@ -9,7 +9,7 @@ echo ""
 echo "============================FIN TEST 1===================================="
 echo ""
 echo "=============================TEST 2======================================"
-echo "Test 2: Mostramos por stdout los numeros primos menores que -5."
+echo "Test 2: Se retorna un codigo de error por haber ingresado un numero negativo."
 ./erat -o - -5
 echo ""
 echo "============================FIN TEST 2===================================="
