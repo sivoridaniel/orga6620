@@ -97,33 +97,19 @@ Cuando ocurre un error inesperado, el mismo es informado por stderr y finaliza e
 liberando la memoria que se habia solicitado hasta el momento.
 (con la funión perror()).
 
-\subsection{{\normalsize Desarrollo de actividades}}
+\subsection{{\normalsize Corridas de prueba }}
 
 \begin{enumerate}
-\item Se instaló en un linux un repositorio de fuentes 
-\htmladdnormallink{(GIT)}{https://es.wikipedia.org/wiki/Git}
-para que al dividir las tareas del TP se pudiese hacer una unión de
-los cambios ingresados por cada uno de los integrantes más fácilmente. 
-\item Cada persona del grupo se comprometió a que sus cambios en el código
-fuente y los cambios obtenidos del repositorio que pudiesen haber subido los
-otros integrantes del grupo, sean compilados los sistemas operativos Linux y el NetBSD, asegurando así portabilidad entre plataformas planteada en el enunciado. 
-\item Se estableció que todos los integrantes en mayor o menor medida, 
-contribuyan en el desarrollo de todas las partes del código para que 
-nadie quede en desconocimiento de lo que se hizo en cada sección. 
-Si bien cada parte del código fue realizada por diferentes integrantes (parseo
-de los argumentos, lectura de los ficheros, etc), todos nos 
-familiarizamos con cada una de estas partes y cumplimos la función 
-de testers de lo hecho por otros integrantes. 
-\item Se propuso como meta paralela, hacer el programa lo mas reutilizable
-posible tratando de que los métodos desarrollados, sean los suficientemente
-modulares como para su posible reutilización en los TPs venideros.
-\item Para poder generar el código assembler a partir del código fuente, 
-dentro de NETBSD se utilizó gcc con la siguiente opción: 
-	\begin{tabbing}
-	------- \= ----- \= \kill
-	\> \textbf{\emph{gcc -S main.c}}\\ 
-	\end{tabbing}
-\item Para crear el presente informe se debe utilizar el comando make en el directorio informe.
+\item Caso N = -5
+El programa no imprime nada y retorna el codigo de error 1.
+\item Caso N = 1
+El programa no imprime nada y retorna el codigo de error 1. 
+\item Caso N = 10
+El programa imprime: 2 3 5 7 y retorna el codigo de exito 0.
+\item Caso N = 50
+El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el codigo de exito 0.
+\item Caso N = 100
+El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 y retorna el codigo de exito 0.  
 \end{enumerate}
 
 \newpage{}
