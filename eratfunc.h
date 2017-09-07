@@ -21,38 +21,38 @@
 
 #define ALGUN_PROBLEMA 0
 
-//Pre: Se ingresa el tope hasta el cual se calcularán los números primos y un arreglo de enteros no inicializado.
-//Pos: El arreglo se encuentra cargado con todos los números correspondientes hasta el valor tope. 
+//Pre: Se ingresa el tope hasta el cual se calcularan los numeros primos y un arreglo de enteros no inicializado.
+//Pos: El arreglo se encuentra cargado con todos los numeros correspondientes hasta el valor tope. 
 void inicializarNumerosPrimos(int tope, int arreglo[]);
 
-//Pre: Se ingresa el arreglo y su cantidad máxima de elementos.
-//Pos: Los valores distintos a cero en el rreglo serán los números primos buscados. 
+//Pre: Se ingresa el arreglo y su cantidad maxima de elementos.
+//Pos: Los valores distintos a cero en el rreglo seran los numeros primos buscados. 
 void encontrarNumerosPrimos(int tope, int arreglo[]);
 
 
-//Pre: Se ingresa el arreglo y su cantidad máxima de elementos.
-//Pos: Se imprimen por pantalla los números primos.
+//Pre: Se ingresa el arreglo y su cantidad maxima de elementos.
+//Pos: Se imprimen por pantalla los numeros primos.
 void imprimirPorPantalla(int tope, int arreglo[]);
 
-//Pre: Se ingresa el arreglo y su cantidad máxima de elementos.
-//Pos: Se crea un archivo de texto en el cual se guardarán los números primos.
+//Pre: Se ingresa el arreglo y su cantidad maxima de elementos.
+//Pos: Se crea un archivo de texto en el cual se guardaran los numeros primos.
 int generarArchivo(int tope, int arreglo[], const char* name);
 
 //Imprime por pantalla las instrucciones de uso de erat
 void mostrarAyuda();
 
-//Imprime por pantalla la versión de erat
+//Imprime por pantalla la version de erat
 void mostrarVersion();
 
-//Verifica que los argumentos sean -h, -V, -o N, - N; donde N es un entero mayor que 2 y menor que el máximo (yo puse 4096).
+//Verifica que los argumentos sean -h, -V, -o N, - N; donde N es un entero mayor que 2 y menor que el maximo (yo puse 4096).
 //Devuelve: 1 si el entero se escapa del rango predeterminado.
-//			2 si no se ingresaron comando válidos.
-//			0 si todos los argumentos son válidos y se puede proceder.
+//			2 si no se ingresaron comando validos.
+//			0 si todos los argumentos son validos y se puede proceder.
 int validarArgumentos(int argc, char **argv);
 
-//Realizará alguna de las acciones:
-//	-h muestra el menú de ayuda.
-//	-V muestra la versión.
+//Realizara alguna de las acciones:
+//	-h muestra el menu de ayuda.
+//	-V muestra la version.
 //	-o muestra por pantalla y crea un archivo.
 //	-  muestra por pantalla.
 int realizarAccion(int argc, char **argv);

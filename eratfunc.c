@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "eratfunc.h"
 
-//Llena el arreglo con los números necesarios del 2 al máximo estipulado.
+//Llena el arreglo con los numeros necesarios del 2 al maximo estipulado.
 void inicializarNumerosPrimos(int tope, int arreglo[]){
 	
 	int valor = INICIO_VALOR;
@@ -14,7 +14,7 @@ void inicializarNumerosPrimos(int tope, int arreglo[]){
 	}
 }
 
-//Realiza el proceso de la Criba de Eratóstenes para encontrar los números primos.
+//Realiza el proceso de la Criba de Eratostenes para encontrar los numeros primos.
 void encontrarNumerosPrimos(int tope, int arreglo[]){
 	
 	inicializarNumerosPrimos(tope, arreglo);
@@ -71,7 +71,7 @@ void mostrarAyuda(){
 	printf("	-o,		--output	Path to output file.;\n");	
 }
 
-//Se verifica que los parámetros ingresados sigan el formato predeterminado
+//Se verifica que los parametros ingresados sigan el formato predeterminado
 int validarArgumentos(int argc, char **argv){
 	if ((argc > TODOS_LOS_ARGUMENTOS) || (argc < DOS_ARGUMENTOS)) {
 		return ERROR_COMANDO_INVALIDO;
@@ -110,7 +110,7 @@ int validarArgumentos(int argc, char **argv){
 }		
 
 
-//Se realiza la acción previamente validada, ya sea mostrar la versión, la ayuda o hallar los números primos.
+//Se realiza la accion previamente validada, ya sea mostrar la version, la ayuda o hallar los numeros primos.
 int realizarAccion(int argc, char **argv) {
 	int mensajeDeError = TODO_OK;
 	if (strcmp(argv[OPCION], "-h") == CORRECTO){ 
