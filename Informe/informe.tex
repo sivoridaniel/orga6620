@@ -17,7 +17,7 @@
 % Información sobre los autores.
 \author{	Sebastian Ripari, \textit{Padrón Nro. 96453}\\
             \texttt{sebastiandanielripari@hotmail.com }\\\\
-            Cesar Emanuel Lencina, \textit{Padrón Nro. 96078}\\
+            César Emanuel Lencina, \textit{Padrón Nro. 96078}\\
             \texttt{cel_1990@live.com}\\\\
 			Pablo Sivori, \textit{Padrón Nro. 84026}\\
             \texttt{sivori.daniel@gmail.com}\\\\               
@@ -60,7 +60,7 @@ operativo NetBSD/pmax.
 Como lenguaje de implementación se eligio C ya que el mismo permite una alta portabilidad entre 
 diferentes plataformas. El desarrollo del programa se realizó usando editores de texto 
 (gedit,vim, kwrite y sublime) y compilando los archivos fuente con 
-\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux. Ya que esta compilador es compatible
+\htmladdnormallink{GCC}{http://gcc.gnu.org/} que viene en linux. Ya que este compilador es compatible
 con el sistema operativo NetBSD y con la arquitecura MIPS.
 Para compilar, ejecutar el siguiente comando:
 
@@ -71,16 +71,16 @@ Para compilar, ejecutar el siguiente comando:
 
 \subsection {{\normalsize Descripción del programa}}
 
-Por empezar tenemos un archivo llamado \texttt{erat.c} que contiene la funcion
-\texttt{main}, aqui lo primero que hacemos es la validacion de los argumentos, mediante 
-una funcion llamada \texttt{validarArgumentos}. Caso de ingresarse algo invalido 
-el programa no continuara, y retornara un valor distinto de 0, osea un codigo de error. Caso contrario, 
-se llama a la funcion \texttt{realizarAccion} y aqui comienza el procesamiento de calcular 
-la cantidad de numeros primos, entre 2 y el numero \texttt{tope} ingresado. Basicamente lo que hacemos es 
-crear un array que contiene todos los numeros entre 2 y el numero ingresado, el \texttt{tope}. 
-y luego le aplicamos a este array el algoritmo de la Criba de Erastostenes, mediante la funcion \texttt{encontrarNumerosPrimos},
+Por empezar tenemos un archivo llamado \texttt{erat.c} que contiene la función
+\texttt{main}, aquí lo primero que hacemos es la validacion de los argumentos, mediante 
+una función llamada \texttt{validarArgumentos}. Caso de ingresarse algo inválido 
+el programa no continuará, y retornara un valor distinto de 0, osea un código de error. Caso contrario, 
+se llama a la función \texttt{realizarAccion} y aquí comienza el procesamiento de calcular 
+la cantidad de números primos, entre 2 y el número \texttt{tope} ingresado. Básicamente lo que hacemos es 
+crear un array que contiene todos los números entre 2 y el número ingresado, el \texttt{tope}. 
+y luego le aplicamos a este array el algoritmo de la Criba de Erastostenes, mediante la función \texttt{encontrarNumerosPrimos},
 que en las posiciones del array donde no hay un numero primo setea un cero.
-Para luego tomar este array desde una funcion que se llama \texttt{imprimirPorPantalla}, y aqui imprimir todos los numeros distintos
+Para luego tomar este array desde una función que se llama \texttt{imprimirPorPantalla}, y aquí imprimir todos los números distintos
 de cero, que son los primos.
 
 \subsubsection {{\normalsize Errores posibles}}
@@ -94,15 +94,15 @@ de cero, que son los primos.
 
 \begin{enumerate}
 \item Caso N = -5
-El programa no imprime nada y retorna el codigo de error 1.
+El programa no imprime nada y retorna el código de error 1.
 \item Caso N = 1
-El programa no imprime nada y retorna el codigo de error 1. 
+El programa no imprime nada y retorna el código de error 1. 
 \item Caso N = 10
-El programa imprime: 2 3 5 7 y retorna el codigo de exito 0.
+El programa imprime: 2 3 5 7 y retorna el código de éxito 0.
 \item Caso N = 50
-El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el codigo de exito 0.
+El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 y retorna el código de éxito 0.
 \item Caso N = 100
-El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 y retorna el codigo de exito 0.  
+El programa imprime 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 y retorna el código de exito 0.  
 \end{enumerate}
 	
 \newpage
